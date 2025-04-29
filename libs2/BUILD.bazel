@@ -1,0 +1,40 @@
+# -*- python -*-
+
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "config_data",
+    srcs = [
+        "config/config.yaml",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "lib_1",
+    srcs = [
+        "lib_1.cc",
+    ],
+    hdrs = [
+        "lib_1.h",
+    ],
+    data = ["//libs2:config_data"],
+    deps = [
+        "@yaml-cpp//:yaml-cpp",
+    ],
+)
+
+cc_test(
+    name = "lib_test",
+    srcs = [
+        "test/lib_test.cc",
+    ],
+    deps = [
+        ":lib_1",
+        "@googletest//:gtest",
+        "@googletest//:gtest_main",
+    ],
+    data = [
+        ":config_data",
+    ]
+)

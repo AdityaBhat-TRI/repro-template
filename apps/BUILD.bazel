@@ -1,0 +1,11 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "my_app",
+    srcs = ["main.py"],
+    main = "main.py",
+    deps = [
+        "@repro_template_python_deps//matplotlib:pkg",
+        "@repro_template_python_deps//numpy:pkg",
+    ],
+)
